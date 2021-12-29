@@ -1,0 +1,118 @@
+/Users/sid/IdeaProjects/learn/mw-feast-samples/venv/bin/python /Users/sid/IdeaProjects/learn/mw-feast-samples/test_registry_consistency.py
+12/29/2021 08:58:04 PM INFO:Starting Thread-Create-Feature-View
+12/29/2021 08:58:04 PM INFO:Found credentials in shared credentials file: ~/.aws/credentials
+12/29/2021 08:58:07 PM INFO:self.createFVRequest: {'name': 'trc_1p', 'primaryKeys': [{'name': 'bundle', 'datatype': 'string'}], 'features': [{'name': 'platform_category', 'datatype': 'string'}, {'name': 'asn', 'datatype': 'string'}], 'online': False, 'output': {'fileType': 'csv', 'hasHeader': True}, 'featureGroupName': 'xyz', 'featureGroupVersion': '1.1.0'}
+12/29/2021 08:58:09 PM INFO:Created RepoConfig object: registry='s3://mwfs-betaclient1-roots3/feast/registry/registry' project='charmed_escargot' provider='aws' online_store=DynamoDBOnlineStoreConfig(type='dynamodb', region='ap-southeast-2') offline_store=RedshiftOfflineStoreConfig(type='redshift', cluster_id='feastbetaredshiftcluster-etzn75aqranj', region='ap-southeast-2', user='admin', database='feast-beta', s3_staging_location='s3://mwfs-betaclient1-roots3/feast/staging', iam_role='arn:aws:iam::128669529570:role/feast-beta-instrole') repo_path=None
+12/29/2021 08:58:12 PM INFO:Found credentials in shared credentials file: ~/.aws/credentials
+12/29/2021 08:58:21 PM INFO:bundle
+12/29/2021 08:58:21 PM INFO:VARCHAR(max)
+12/29/2021 08:58:21 PM INFO:platform_category
+12/29/2021 08:58:21 PM INFO:VARCHAR(max)
+12/29/2021 08:58:21 PM INFO:asn
+12/29/2021 08:58:21 PM INFO:VARCHAR(max)
+12/29/2021 08:58:21 PM INFO:create external table spectrum.fs_trc_1p( bundle VARCHAR(max), platform_category VARCHAR(max), asn VARCHAR(max), event_timestamp TIMESTAMP, created_timestamp TIMESTAMP)
+                        row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+                        location 's3://mwfs-betaclient1-roots3/feature-store/trc_1p/'
+                        table properties ('wholeFile' = 'true');
+
+12/29/2021 08:58:24 PM INFO:printing create table response
+12/29/2021 08:58:24 PM INFO:{'ClusterIdentifier': 'feastbetaredshiftcluster-etzn75aqranj', 'CreatedAt': datetime.datetime(2021, 12, 29, 20, 58, 23, 565000, tzinfo=tzlocal()), 'Database': 'feast-beta', 'DbUser': 'admin', 'Id': 'c959ded8-797a-4e81-8ed7-cadf0864ad67', 'ResponseMetadata': {'RequestId': 'd85cb547-817e-462f-9317-3dffac346b2d', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'd85cb547-817e-462f-9317-3dffac346b2d', 'content-type': 'application/x-amz-json-1.1', 'content-length': '175', 'date': 'Wed, 29 Dec 2021 12:58:23 GMT'}, 'RetryAttempts': 0}}
+12/29/2021 08:58:24 PM INFO:Deploying feature store to AWS: {
+  "spec": {
+    "name": "trc_1p",
+    "entities": [
+      "bundle"
+    ],
+    "features": [
+      {
+        "name": "platform_category",
+        "valueType": "STRING"
+      },
+      {
+        "name": "asn",
+        "valueType": "STRING"
+      }
+    ],
+    "ttl": "31449600s",
+    "batchSource": {
+      "type": "BATCH_REDSHIFT",
+      "eventTimestampColumn": "event_timestamp",
+      "createdTimestampColumn": "created_timestamp",
+      "redshiftOptions": {
+        "query": "SELECT * FROM spectrum.fs_trc_1p"
+      },
+      "dataSourceClassType": "feast.infra.offline_stores.redshift_source.RedshiftSource"
+    }
+  },
+  "meta": {}
+}
+12/29/2021 08:58:50 PM INFO:Exiting Thread-Create-Feature-View
+12/29/2021 08:58:50 PM INFO:creation of 1st FV completed
+12/29/2021 08:58:50 PM INFO:copying data to required s3 location before starting materialization...
+12/29/2021 08:58:57 PM INFO:data copy to S3 done.
+12/29/2021 08:58:57 PM INFO:Let's change the 1st FV to be an online store using feast apply.
+12/29/2021 08:58:59 PM INFO:bundle
+12/29/2021 08:58:59 PM INFO:VARCHAR(max)
+12/29/2021 08:58:59 PM INFO:platform_category
+12/29/2021 08:58:59 PM INFO:VARCHAR(max)
+12/29/2021 08:58:59 PM INFO:asn
+12/29/2021 08:58:59 PM INFO:VARCHAR(max)
+12/29/2021 08:59:01 PM INFO:Starting Thread-Materialize-FV
+12/29/2021 08:59:01 PM INFO:Let's give the materialization thread a 20-sec head-start before creating a new FV...
+Materializing 1 feature views to 2021-12-29 20:59:01+08:00 into the dynamodb online store.
+
+trc_1p from 2020-12-30 12:59:02+08:00 to 2021-12-29 20:59:01+08:00:
+ 12%|██████▊                                                  | 1800/15060 [00:11<01:35, 138.14it/s]12/29/2021 08:59:21 PM INFO:waiting 20 seconds for the FV creation process to complete
+12/29/2021 08:59:21 PM INFO:Starting Thread-Create-Feature-View
+ 12%|██████▉                                                  | 1825/15060 [00:11<01:26, 152.95it/s]12/29/2021 08:59:21 PM INFO:Found credentials in shared credentials file: ~/.aws/credentials
+ 17%|█████████▌                                               | 2525/15060 [00:15<01:01, 203.20it/s]12/29/2021 08:59:25 PM INFO:self.createFVRequest: {'name': 'trc_2p', 'primaryKeys': [{'name': 'bundle', 'datatype': 'string'}], 'features': [{'name': 'platform_category', 'datatype': 'string'}, {'name': 'asn', 'datatype': 'string'}], 'online': False, 'output': {'fileType': 'csv', 'hasHeader': True}, 'featureGroupName': 'xyz', 'featureGroupVersion': '1.1.0'}
+ 20%|███████████▏                                             | 2950/15060 [00:17<00:57, 209.78it/s]12/29/2021 08:59:27 PM INFO:bundle
+12/29/2021 08:59:27 PM INFO:VARCHAR(max)
+12/29/2021 08:59:27 PM INFO:platform_category
+12/29/2021 08:59:27 PM INFO:VARCHAR(max)
+12/29/2021 08:59:27 PM INFO:asn
+12/29/2021 08:59:27 PM INFO:VARCHAR(max)
+12/29/2021 08:59:27 PM INFO:create external table spectrum.fs_trc_2p( bundle VARCHAR(max), platform_category VARCHAR(max), asn VARCHAR(max), event_timestamp TIMESTAMP, created_timestamp TIMESTAMP)
+                        row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+                        location 's3://mwfs-betaclient1-roots3/feature-store/trc_2p/'
+                        table properties ('wholeFile' = 'true');
+
+ 22%|████████████▊                                            | 3375/15060 [00:19<00:54, 215.66it/s]12/29/2021 08:59:29 PM INFO:printing create table response
+12/29/2021 08:59:29 PM INFO:{'ClusterIdentifier': 'feastbetaredshiftcluster-etzn75aqranj', 'CreatedAt': datetime.datetime(2021, 12, 29, 20, 59, 29, 568000, tzinfo=tzlocal()), 'Database': 'feast-beta', 'DbUser': 'admin', 'Id': '4c07ac1b-a62f-416b-a264-ccb259b69ffe', 'ResponseMetadata': {'RequestId': '1af50830-cb3f-49e6-995e-1e43baefafc6', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '1af50830-cb3f-49e6-995e-1e43baefafc6', 'content-type': 'application/x-amz-json-1.1', 'content-length': '175', 'date': 'Wed, 29 Dec 2021 12:59:29 GMT'}, 'RetryAttempts': 0}}
+12/29/2021 08:59:29 PM INFO:Deploying feature store to AWS: {
+  "spec": {
+    "name": "trc_2p",
+    "entities": [
+      "bundle"
+    ],
+    "features": [
+      {
+        "name": "platform_category",
+        "valueType": "STRING"
+      },
+      {
+        "name": "asn",
+        "valueType": "STRING"
+      }
+    ],
+    "ttl": "31449600s",
+    "batchSource": {
+      "type": "BATCH_REDSHIFT",
+      "eventTimestampColumn": "event_timestamp",
+      "createdTimestampColumn": "created_timestamp",
+      "redshiftOptions": {
+        "query": "SELECT * FROM spectrum.fs_trc_2p"
+      },
+      "dataSourceClassType": "feast.infra.offline_stores.redshift_source.RedshiftSource"
+    }
+  },
+  "meta": {}
+}
+ 39%|██████████████████████▏                                  | 5875/15060 [00:32<00:53, 172.60it/s]12/29/2021 08:59:43 PM INFO:The process that is materializing the 1st FV is unaware that a new FV has been created! Feature view trc_2p does not exist in project charmed_escargot
+ 52%|█████████████████████████████▋                           | 7850/15060 [00:43<00:36, 199.89it/s]12/29/2021 08:59:53 PM INFO:Exiting Thread-Create-Feature-View
+12/29/2021 08:59:53 PM INFO:creation of 2nd fv has completed
+100%|████████████████████████████████████████████████████████| 15060/15060 [01:26<00:00, 174.65it/s]
+12/29/2021 09:00:38 PM INFO:materialization complete. Let's check if 2nd fv exists in registry now...
+12/29/2021 09:00:39 PM INFO:2nd Feature View: trc_2p does not exist in registry! Exception: Feature view trc_2p does not exist in project charmed_escargot
+
+Process finished with exit code 0

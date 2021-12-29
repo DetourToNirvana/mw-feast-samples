@@ -1,0 +1,14 @@
+project: charmed_escargot
+registry: s3://mwfs-betaclient1-roots3/feast/registry/registry
+provider: aws
+online_store:
+  type: dynamodb
+  region: ap-southeast-2
+offline_store:
+  type: redshift
+  cluster_id: feastbetaredshiftcluster-etzn75aqranj
+  region: ap-southeast-2
+  database: feast-beta
+  user: admin
+  s3_staging_location: s3://mwfs-betaclient1-roots3/feast/staging
+  iam_role: arn:aws:iam::128669529570:role/feast-beta-instrole

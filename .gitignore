@@ -1,0 +1,31 @@
+# Default ignored files
+/.idea/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# Python VirtualEnv folders
+/bin/
+/venv/
+/lib/
+
+# IDEA artifacts and output dirs
+*.iml
+*.ipr
+*.iws
+.idea
+out
+test-output
+atlassian-ide-plugin.xml
+.gradletasknamecache
+
+# Other misc
+.DS_Store
+.settings
+
+# Exclude python cache folders & files
+__pycache__
+*.pyc
